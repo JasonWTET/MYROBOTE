@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QQ 群机器人 · 功能总览</title>
+<style>
+  :root {
+    --bg: #12141a;
+    --card: #1b1f29;
+    --card2: #20253280;
+    --line: #2b3242;
+    --gold: #d9a94e;
+    --gold-soft: #d9a94e26;
+    --text: #e8e6e0;
+    --muted: #9aa1b0;
+    --tag: #6ea8fe;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    line-height: 1.7;
+    padding-bottom: 60px;
+  }
+  .hero {
+    background:
+      radial-gradient(1200px 400px at 50% -80px, #2a3350 0%, transparent 70%),
+      linear-gradient(180deg, #171a23 0%, var(--bg) 100%);
+    text-align: center;
+    padding: 56px 20px 36px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .seal {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    padding: 2px 10px;
+    margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 30px; font-weight: 700; letter-spacing: 2px; }
+  .hero p.sub { color: var(--muted); margin-top: 10px; font-size: 14px; }
+  .hero .stats {
+    display: flex; justify-content: center; gap: 28px; margin-top: 22px; flex-wrap: wrap;
+  }
+  .hero .stats b { font-size: 22px; color: var(--gold); display: block; }
+  .hero .stats span { font-size: 12px; color: var(--muted); }
+  main { max-width: 980px; margin: 0 auto; padding: 8px 18px; }
+  nav.toc {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    position: sticky; top: 0; z-index: 9;
+    background: #12141af2; backdrop-filter: blur(6px);
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+  }
+  nav.toc a {
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px;
+    transition: all .15s;
+  }
+  nav.toc a:hover { color: var(--gold); border-color: var(--gold); }
+  section { margin-top: 34px; }
+  section > h2 {
+    font-size: 20px; letter-spacing: 1px;
+    padding-left: 12px; border-left: 4px solid var(--gold);
+    margin-bottom: 6px;
+  }
+  section > p.desc { color: var(--muted); font-size: 13.5px; margin-bottom: 14px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 16px;
+  }
+  .card h3 {
+    font-size: 15.5px; color: var(--gold); margin-bottom: 10px; font-weight: 600;
+  }
+  .card h3 .n { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px dashed var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; font-size: 12.5px; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  td.cmd { white-space: nowrap; }
+  code, .cmd {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    background: var(--gold-soft); color: var(--gold);
+    border-radius: 4px; padding: 1px 6px; font-size: 13px;
+  }
+  ul.rules { list-style: none; font-size: 13.5px; }
+  ul.rules li { padding: 5px 0 5px 18px; position: relative; color: var(--text); }
+  ul.rules li::before { content: "◆"; position: absolute; left: 0; color: var(--gold); font-size: 10px; top: 10px; }
+  ul.rules small { color: var(--muted); }
+  footer {
+    text-align: center; color: var(--muted); font-size: 12.5px;
+    margin-top: 48px; border-top: 1px solid var(--line); padding-top: 20px;
+  }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 24px; }
+    th, td { padding: 6px 6px; font-size: 12.5px; }
+    table { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="seal">群 机 器 人</div>
+  <h1>功能总览</h1>
+  <p class="sub">剑网3 查询 · 实时事件推送 · 塔罗占卜 · 群记录本</p>
+  <div class="stats">
+    <div><b>7</b><span>插件</span></div>
+    <div><b>73</b><span>指令注册点</span></div>
+    <div><b>67+</b><span>免斜杠可用</span></div>
+    <div><b>2026-11-12</b><span>更新日期</span></div>
+  </div>
+</div>
+
+<main>
+
+<nav class="toc">
+  <a href="#jx3">剑网3 查询</a>
+  <a href="#event">事件推送</a>
+  <a href="#tarot">塔罗牌</a>
+  <a href="#record">记录</a>
+  <a href="#base">基础功能</a>
+</nav>
+
+<section id="jx3">
+  <h2>剑网3 查询</h2>
+  <p class="desc">数据源 JX3API。区服/心法支持别名自动匹配（如「乾坤」→乾坤一掷），不填区服时用默认区服。以下指令均可加 <code>[区服]</code> 参数。</p>
+
+  <div class="card"><h3>物价交易</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/金价</td><td>各区服金价行情（别名：金币）</td></tr>
+      <tr><td class="cmd">/物价 外观名</td><td>外观成交记录（别名：外观）</td></tr>
+      <tr><td class="cmd">/成本 物品</td><td>物品成本计算</td></tr>
+      <tr><td class="cmd">/贴吧物价 物品</td><td>贴吧参考价</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>榜单排行</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/榜单 榜单名</td><td>各类排行榜</td></tr>
+      <tr><td class="cmd">/跨服名剑 [22/33/55]</td><td>跨服名剑排行榜</td></tr>
+      <tr><td class="cmd">/武林争霸 [浩气/恶人]</td><td>武林争霸排行</td></tr>
+      <tr><td class="cmd">/捕快荣誉</td><td>捕快荣誉榜</td></tr>
+      <tr><td class="cmd">/江湖浪客</td><td>江湖浪客榜</td></tr>
+      <tr><td class="cmd">/决斗挑战</td><td>决斗挑战榜</td></tr>
+      <tr><td class="cmd">/试炼排行 心法</td><td>试炼排行榜</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>活动情报</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/日常</td><td>每日任务一览</td></tr>
+      <tr><td class="cmd">/关隘</td><td>关隘活动信息</td></tr>
+      <tr><td class="cmd">/赤兔</td><td>赤兔刷新信息</td></tr>
+      <tr><td class="cmd">/帮战</td><td>帮会竞赛信息</td></tr>
+      <tr><td class="cmd">/阵营拍卖 [物品]</td><td>阵营拍卖记录</td></tr>
+      <tr><td class="cmd">/的卢</td><td>的卢刷新信息</td></tr>
+      <tr><td class="cmd">/烟花 角色名</td><td>烟花燃放记录</td></tr>
+      <tr><td class="cmd">/刷马</td><td>马驹刷新频道记录</td></tr>
+      <tr><td class="cmd">/马场</td><td>各地图刷新时间</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>角色查询</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/角色 角色名</td><td>角色基础信息</td></tr>
+      <tr><td class="cmd">/名片 角色名</td><td>角色卡片图</td></tr>
+      <tr><td class="cmd">/成就 角色名 成就名</td><td>成就进度查询</td></tr>
+      <tr><td class="cmd">/精耐 角色名</td><td>精力耐力状态</td></tr>
+      <tr><td class="cmd">/百战</td><td>百战异闻汇总</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>名剑推栏</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/战绩 角色名 [22/33/55]</td><td>名剑个人战绩（别名：名剑战绩）</td></tr>
+      <tr><td class="cmd">/名剑榜 [22/33/55]</td><td>名剑排行（榜期无数据时显示「暂无数据」属正常）</td></tr>
+      <tr><td class="cmd">/名剑流派 [22/33/55]</td><td>名剑流派统计</td></tr>
+      <tr><td class="cmd">/资历榜 [门派]</td><td>资历排行榜（别名：资历排行）</td></tr>
+      <tr><td class="cmd">/技能 心法</td><td>心法技能列表</td></tr>
+      <tr><td class="cmd">/奇穴 心法</td><td>心法 12 重奇穴</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>奇遇相关</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/奇遇</td><td>近期全服奇遇</td></tr>
+      <tr><td class="cmd">/角色奇遇 角色名</td><td>角色奇遇记录</td></tr>
+      <tr><td class="cmd">/未出 角色名</td><td>角色未出奇遇列表</td></tr>
+      <tr><td class="cmd">/汇总 [天数]</td><td>奇遇汇总日报</td></tr>
+      <tr><td class="cmd">/奇遇统计 奇遇名</td><td>指定奇遇统计</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>家园休闲</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/花价</td><td>花价行情</td></tr>
+      <tr><td class="cmd">/装饰 名称</td><td>家园装饰查询</td></tr>
+      <tr><td class="cmd">/器物 地图</td><td>器物收录查询</td></tr>
+      <tr><td class="cmd">/小药 [心法]</td><td>增益小药配方</td></tr>
+      <tr><td class="cmd">/骚话</td><td>随机剑三骚话</td></tr>
+      <tr><td class="cmd">/舔狗</td><td>随机舔狗语录</td></tr>
+    </table>
+  </div>
+
+  <div class="card"><h3>系统资讯</h3>
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/开服</td><td>区服开服状态</td></tr>
+      <tr><td class="cmd">/区服状态</td><td>全区服状态一览</td></tr>
+      <tr><td class="cmd">/公告 [条数]</td><td>官方公告</td></tr>
+      <tr><td class="cmd">/新闻 [条数]</td><td>官方新闻</td></tr>
+      <tr><td class="cmd">/技改 [条数]</td><td>技能改动</td></tr>
+      <tr><td class="cmd">/解密</td><td>每日解密</td></tr>
+      <tr><td class="cmd">/科举 题目</td><td>科举答题</td></tr>
+      <tr><td class="cmd">/掉落 物品名</td><td>副本掉落查询</td></tr>
+    </table>
+  </div>
+
+  <p class="desc">另：<code>/剑网3</code> 可在群内直接显示全部指令帮助。</p>
+</section>
+
+<section id="event">
+  <h2>实时事件推送</h2>
+  <p class="desc">JX3API 事件通道实时推送：开服 / 新闻 / 版本更新 / 八卦 / 关隘 / 云丛（免费事件）。推送不消耗查询次数，受 QQ 官方主动消息频控约束。</p>
+  <div class="card">
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/绑定推送</td><td>本群<b>立即开启</b>事件推送（即时生效，无需重启）；重复发送有友好提示</td></tr>
+      <tr><td class="cmd">/取消推送</td><td>本群<b>立即停止</b>事件推送（即时生效）</td></tr>
+      <tr><td class="cmd">/推送状态</td><td>显示通道连接、区服过滤、目标群、事件类型清单</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tarot">
+  <h2>塔罗牌</h2>
+  <p class="desc">牌库：22 张大阿卡纳，牌义定制（含牌序 / 中英文名 / 象征意 / 正逆位牌意）。</p>
+  <div class="card">
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/塔罗牌</td><td>单张每日抽牌（带牌面图）</td></tr>
+      <tr><td class="cmd">/占卜</td><td>牌阵抽牌</td></tr>
+    </table>
+    <ul class="rules" style="margin-top:10px">
+      <li><b>每日限一次</b>：单张与牌阵分别各锁一次（按「群 + 个人」维度），重复抽取返回当日结果</li>
+      <li>正逆位各 50%；<b>逆位时牌面图旋转 180° 发送</b></li>
+      <li>牌义超长自动分条发送</li>
+    </ul>
+  </div>
+</section>
+
+<section id="record">
+  <h2>群记录本</h2>
+  <p class="desc">每个群独立的数据本：记事、查询、随机抽取、导出。数据按群隔离，可回复某条消息 + /记 引用原文。</p>
+  <div class="card">
+    <table>
+      <tr><th>指令</th><th>用法</th></tr>
+      <tr><td class="cmd">/记 [分类] 内容</td><td>新增记录（别名：记录 / 存 / add）</td></tr>
+      <tr><td class="cmd">/智记 内容</td><td>AI 自动分类后记录（别名：ai记 / 智能记 / 自动记）</td></tr>
+      <tr><td class="cmd">/查 分类|关键词 [页]</td><td>查询记录（别名：查询 / 找 / search）</td></tr>
+      <tr><td class="cmd">/抽 [分类]</td><td>随机抽一条记录（别名：随机 / random）</td></tr>
+      <tr><td class="cmd">/分类</td><td>查看全部分类（别名：目录 / 列表）</td></tr>
+      <tr><td class="cmd">/建分类 名称</td><td>新建分类（别名：建目录）</td></tr>
+      <tr><td class="cmd">/删 ID</td><td>删除记录，限作者或管理员（别名：删除）</td></tr>
+      <tr><td class="cmd">/编辑 ID 新内容</td><td>编辑记录，限作者或管理员（别名：改）</td></tr>
+      <tr><td class="cmd">/删分类 名称</td><td>删除分类（仅管理员）</td></tr>
+      <tr><td class="cmd">/预设 add|del|list 名称</td><td>管理可预设分类（别名：preset）</td></tr>
+      <tr><td class="cmd">/导出 [分类] [txt|csv]</td><td>导出记录文件发到群（别名：导出记录 / export）</td></tr>
+      <tr><td class="cmd">/记录帮助</td><td>插件用法说明（别名：记录说明）</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="base">
+  <h2>基础功能</h2>
+  <div class="card">
+    <ul class="rules">
+      <li><b>免斜杠</b>：不用打 <code>/</code> 也能触发指令——<code>金价</code>＝<code>/金价</code>、<code>战绩 张三 33</code>＝<code>/战绩 张三 33</code>，覆盖全部指令；日常用语已屏蔽，不会误触发</li>
+      <li><b>免艾特</b>：群主开启「接收全部群消息」后，不 @ 机器人也能直接发指令；<code>/免艾特</code> 可查看本群是否生效</li>
+      <li><b>功能总览</b>：群内发 <code>/功能</code>，机器人回复本页面链接</li>
+      <li><b>兜底提示</b>：未识别的指令会统一提示，不会装死</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  QQ 官方群机器人 · 群内发 <code>/功能</code> 随时获取本页 · 2026-11-12 更新
+</footer>
+
+</main>
+</body>
+</html>
